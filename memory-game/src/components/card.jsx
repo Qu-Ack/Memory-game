@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import "../styles/card.css"
 
+let gamearr = []
+export default function Card({id , handleChange})
 
-export default function Card({id , handleChange, test}) 
 {   
     const [heros, setHeroes] = useState([]); 
     const [img, setImg] = useState("");
@@ -17,13 +18,40 @@ export default function Card({id , handleChange, test})
 
     } , []);    
 
+    function gameLogic(e) 
+    {
+        gamearr.push(id);
+        for (let i = 0; i < gamearr.length; i++)
+        {
+            for (let j = 0; j < gamearr.length; j++) 
+            {
+                if (i != j) {
+                    if (gamearr[i] == gamearr[j]) {
+                        alert("Game Ends")
+                        location.reload()
+                        gamearr = [];
+                    }
+                }
+                
+            }
+        }
+        
+    }
+
     
     return(
         <div className="card"  >
             <div className="heroimage">
-                <img src={img} onClick={handleChange} alt={heros.name} />
+                <img src={img} onClick={() => {
+                    handleChange();
+                    gameLogic();
+                }} alt={heros.name} />
             </div>
-            <button  onClick={handleChange} className="Name">{heros.name}</button>
+            <button  onClick={() => {
+                handleChange();
+                gameLogic();
+
+            }} className="Name">{heros.name}</button>
         </div>
     )
 }

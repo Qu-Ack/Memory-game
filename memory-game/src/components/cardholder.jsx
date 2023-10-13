@@ -2,12 +2,14 @@ import Card from "./card";
 import "../styles/cardholder.css"
 import { useEffect, useState } from "react";
 
+// let gamearr  = [];
 
 export default function CardHolder() {
 
     const [cards , setCards] = useState({ arr: Array.from({ length: 18 }).map((_, index) => (
-        <Card key={index} id={index + 1} handleChange={shuffle}/>
+        <Card key={index} id={index + 1} handleChange={shuffle} />
     ))});
+    
     
     let pls = cards.arr
     function shuffle() {
@@ -21,7 +23,6 @@ export default function CardHolder() {
         }
         setCards({...cards, arr: pls});
     }
-    
 
     return (
         <div className="cardHolder">
@@ -29,6 +30,7 @@ export default function CardHolder() {
 
                 return card
             })} 
+
         </div>
     )
    
